@@ -13,13 +13,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="px-4 py-2">Book 1</td>
-          <td class="px-4 py-2">Author 1</td>
-          <td class="px-4 py-2">1000</td>
-          <td class="px-4 py-2">10-10-2010</td>
-          <td class="px-4 py-2">Horror</td>
-          <td class="px-4 py-2">1999</td>
+        <tr *ngFor="let book of books">
+          <td class="px-4 py-2">{{ book.title }}</td>
+          <td class="px-4 py-2">{{ book.author }}</td>
+          <td class="px-4 py-2">{{ book.isbn }}</td>
+          <td class="px-4 py-2">{{ book.publishDate }}</td>
+          <td class="px-4 py-2">{{ book.category }}</td>
+          <td class="px-4 py-2">{{ book.price }}</td>
         </tr>
       </tbody>
     </table>
