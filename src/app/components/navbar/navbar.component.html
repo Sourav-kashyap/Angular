@@ -1,1 +1,64 @@
-<p>navbar works!</p>
+<nav
+  class="bg-gray-800 p-3 flex items-center justify-between shadow-md shadow-gray-600"
+>
+  <!-- Title -->
+  <h1
+    class="tracking-wide sm:ml-6 bg-gradient-to-r from-blue-300 to-purple-400 bg-clip-text text-transparent"
+  >
+    Book Management System
+  </h1>
+
+  <!-- Hamburger Icon (visible on mobile) -->
+  <div class="sm:hidden flex items-center">
+    <button (click)="toggleNavbar()" class="text-white">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+
+  <!-- Navigation Links (hidden on mobile, shown on larger screens) -->
+  <div class="space-x-6 sm:ml-6 hidden sm:flex">
+    <a
+      routerLink="/home"
+      class="text-white hover:text-gray-300 no-underline cursor-pointer"
+      >Home</a
+    >
+    <a
+      routerLink="/book-form"
+      class="text-white hover:text-gray-300 no-underline cursor-pointer"
+      >Add Book</a
+    >
+    <a
+      routerLink="/display-books"
+      class="text-white hover:text-gray-300 no-underline cursor-pointer"
+      >View Books</a
+    >
+    <a class="text-white hover:text-gray-300 no-underline cursor-pointer"
+      >Search Books</a
+    >
+  </div>
+
+  <!-- Mobile Menu (hidden by default, toggled when clicked) -->
+  <div
+    [ngClass]="{ hidden: !isNavbarOpen, block: isNavbarOpen }"
+    class="sm:hidden absolute top-16 left-0 w-full bg-gray-800 p-6 space-y-4"
+  >
+    <a
+      routerLink="/home"
+      class="text-white hover:text-gray-300 no-underline cursor-pointer block"
+      >Home</a
+    >
+    <a
+      routerLink="/book-form"
+      class="text-white hover:text-gray-300 no-underline cursor-pointer block"
+      >Add Book</a
+    >
+    <a
+      routerLink="/display-books"
+      class="text-white hover:text-gray-300 no-underline cursor-pointer block"
+      >View Books</a
+    >
+    <a class="text-white hover:text-gray-300 no-underline cursor-pointer block"
+      >Search Books</a
+    >
+  </div>
+</nav>

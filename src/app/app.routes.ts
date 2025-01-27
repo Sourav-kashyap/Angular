@@ -12,6 +12,6 @@ export const routes: Routes = [
         path:'book-form',component:BookFormComponent
     },
     {
-        path:'display-book',component:DisplayBookComponent
+        path:'display-books',component:DisplayBookComponent
     }
 ];
