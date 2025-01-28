@@ -46,7 +46,6 @@ export class BookFormComponent implements OnInit {
 
   ngOnInit() {
     const state = this.navigationDataService.getData();
-    console.log('temp data -> ', state);
     if (state) {
       this.editIndex = state.index;
       this.bookDetails.patchValue(state.bookToEdit);

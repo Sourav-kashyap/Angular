@@ -9,23 +9,31 @@
           <th class="px-4 py-2 text-left">ISBN</th>
           <th class="px-4 py-2 text-left">Publish Date</th>
           <th class="px-4 py-2 text-left">Category</th>
+          <th class="px-4 py-2 text-left">Age</th>
           <th class="px-4 py-2 text-left">Price</th>
           <th class="px-4 py-2 text-left">Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let book of books; let i = index">
-          <td class="px-4 py-2">{{ book.title }}</td>
-          <td class="px-4 py-2">{{ book.author }}</td>
-          <td class="px-4 py-2">{{ book.isbn }}</td>
-          <td class="px-4 py-2">{{ book.publishDate }}</td>
-          <td class="px-4 py-2">{{ book.category }}</td>
-          <td class="px-4 py-2">{{ book.price }}</td>
-          <td class="px-4 py-2">
+          <td class="px-4 py-2 text-left">{{ book.title }}</td>
+          <td class="px-4 py-2 text-left">{{ book.author }}</td>
+          <td class="px-4 py-2 text-left">{{ book.isbn }}</td>
+          <td class="px-4 py-2 text-left">
+            {{ book.publishDate | date : "dd-MM-yyyy" }}
+          </td>
+          <td class="px-4 py-2 text-left">{{ book.category }}</td>
+          <th class="px-4 py-2 text-left font-normal">
+            {{ calculateBookAge(book.publishDate) }}
+          </th>
+          <td class="px-4 py-2 text-left">{{ book.price }}</td>
+          <td class="px-4 py-2 text-left">
             <button class="btn btn-success m-1" (click)="editBook(i)">
               Edit
             </button>
-            <button class="btn btn-danger m-1" (click)="deleteBook(i)">Delete</button>
+            <button class="btn btn-danger m-1" (click)="deleteBook(i)">
+              Delete
+            </button>
           </td>
         </tr>
       </tbody>
