@@ -10,16 +10,23 @@
           <th class="px-4 py-2 text-left">Publish Date</th>
           <th class="px-4 py-2 text-left">Category</th>
           <th class="px-4 py-2 text-left">Price</th>
+          <th class="px-4 py-2 text-left">Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let book of books">
+        <tr *ngFor="let book of books; let i = index">
           <td class="px-4 py-2">{{ book.title }}</td>
           <td class="px-4 py-2">{{ book.author }}</td>
           <td class="px-4 py-2">{{ book.isbn }}</td>
           <td class="px-4 py-2">{{ book.publishDate }}</td>
           <td class="px-4 py-2">{{ book.category }}</td>
           <td class="px-4 py-2">{{ book.price }}</td>
+          <td class="px-4 py-2">
+            <button class="btn btn-success m-1" (click)="editBook(i)">
+              Edit
+            </button>
+            <button class="btn btn-danger m-1" (click)="deleteBook(i)">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>
