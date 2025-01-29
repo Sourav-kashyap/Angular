@@ -1,44 +1,63 @@
 <app-navbar></app-navbar>
-<div class="container mx-w-full p-4">
-  <div class="overflow-x-auto mt-4">
-    <table class="table-auto w-full border-collapse shadow-lg rounded-lg">
-      <thead class="bg-gray-800 text-white">
-        <tr>
-          <th class="px-4 py-2 text-left">Title</th>
-          <th class="px-4 py-2 text-left">Author</th>
-          <th class="px-4 py-2 text-left">ISBN</th>
-          <th class="px-4 py-2 text-left">Publish Date</th>
-          <th class="px-4 py-2 text-left">Category</th>
-          <th class="px-4 py-2 text-left">Age</th>
-          <th class="px-4 py-2 text-left">Price</th>
-          <th class="px-4 py-2 text-left">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let book of books; let i = index">
-          <td class="px-4 py-2 text-left">{{ book.title }}</td>
-          <td class="px-4 py-2 text-left">{{ book.author }}</td>
-          <td class="px-4 py-2 text-left">{{ book.isbn }}</td>
-          <td class="px-4 py-2 text-left">
-            {{ book.publishDate | date : "dd-MM-yyyy" }}
-          </td>
-          <td class="px-4 py-2 text-left">{{ book.category }}</td>
-          <th class="px-4 py-2 text-left font-normal">
-            {{ calculateBookAge(book.publishDate) }}
-          </th>
-          <td class="px-4 py-2 text-left">{{ book.price }}</td>
-          <td class="px-4 py-2 text-left">
-            <button class="btn btn-success m-1" (click)="editBook(i)">
-              Edit
-            </button>
-            <button class="btn btn-danger m-1" (click)="deleteBook(i)">
-              Delete
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+
+<!-- Changed mx-w-full to w-full -->
+<div class="overflow-x-auto m-4">
+  <table class="table-auto w-full border-collapse shadow-lg rounded-lg">
+    <thead class="bg-gray-800 text-white">
+      <tr>
+        <th class="px-4 py-2 text-left">Title</th>
+        <th class="px-4 py-2 text-left">Author</th>
+        <th class="px-4 py-2 text-left">ISBN</th>
+        <th class="px-4 py-2 text-left">Publish Date</th>
+        <th class="px-4 py-2 text-left">Category</th>
+        <th class="px-4 py-2 text-left">Age</th>
+        <th class="px-4 py-2 text-left">Price</th>
+        <th class="px-4 py-2 text-left">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Display API Books -->
+      <tr *ngFor="let apiBook of apiBooks; let i = index" class="border-b">
+        <td class="px-4 py-2">{{ apiBook?.title }}</td>
+        <td class="px-4 py-2">
+          {{ apiBook?.author ? apiBook.author : "N/A" }}
+        </td>
+        <td class="px-4 py-2">{{ apiBook?.isbn }}</td>
+        <td class="px-4 py-2">{{ apiBook?.publishDate }}</td>
+        <td class="px-4 py-2">
+          {{ apiBook?.category ? apiBook?.category : "Unknown" }}
+        </td>
+        <td class="px-4 py-2">{{ calculateBookAge(apiBook?.publishDate) }}</td>
+        <td class="px-4 py-2">{{ 999 }}</td>
+        <td class="px-4 py-2 flex items-center space-x-2">
+          <button class="btn btn-success" (click)="apiEditBook(i)">Edit</button>
+          <button class="btn btn-danger" (click)="apiDeleteBook(i)">
+            Delete
+          </button>
+        </td>
+      </tr>
+      <!-- Display user added Book -->
+      <tr *ngFor="let book of books; let i = index">
+        <td class="px-4 py-2 text-left">{{ book?.title }}</td>
+        <td class="px-4 py-2 text-left">{{ book?.author }}</td>
+        <td class="px-4 py-2 text-left">{{ book?.isbn }}</td>
+        <td class="px-4 py-2 text-left">
+          {{ book?.publishDate | date : "dd-MM-yyyy" }}
+        </td>
+        <td class="px-4 py-2 text-left">{{ book?.category }}</td>
+        <td class="px-4 py-2 text-left">
+          {{ calculateBookAge(book?.publishDate) }}
+        </td>
+        <td class="px-4 py-2 text-left">{{ book?.price }}</td>
+        <td class="px-4 py-2 text-left">
+          <button class="btn btn-success" (click)="editBook(i)">Edit</button>
+          <button class="btn btn-danger m-1" (click)="deleteBook(i)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
   <div class="mt-6">
     <button
       class="btn w-full text-white font-semibold py-3 rounded-md shadow-md bg-gradient-to-r from-blue-400 to-purple-600 hover:from-blue-500 hover:to-purple-700 focus:ring-2 focus:ring-blue-500"
