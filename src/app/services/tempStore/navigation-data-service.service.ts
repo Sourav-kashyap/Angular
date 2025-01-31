@@ -31,7 +31,6 @@ export class NavigationDataServiceService {
   setApiData(data: any) {
     this.isApiData = true;
     this.apiData = data;
-    console.log('2 before edit first set the data ->', this.apiData);
   }
 
   getApiData() {
@@ -44,10 +43,5 @@ export class NavigationDataServiceService {
 
   clearApiData() {
     this.apiData = null;
-  }
-
-  resetBoolValue() {
-    this.isApiData = false;
-    this.isData = false;
   }
 }

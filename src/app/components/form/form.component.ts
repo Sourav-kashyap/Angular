@@ -52,7 +52,6 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {
     if (this.navigationDataService.getIsData()) {
-      console.log('3 coming form user -> ');
       const state = this.navigationDataService.getData();
       if (state) {
         this.editIndex = state.index;
@@ -61,8 +60,6 @@ export class FormComponent implements OnInit {
       }
     }
     if (this.navigationDataService.getIsApiData()) {
-      console.log('3 coming form api -> ');
-
       const state = this.navigationDataService.getApiData();
       if (state) {
         this.editIndex = state.index;
@@ -74,22 +71,15 @@ export class FormComponent implements OnInit {
 
   onSubmit() {
     const bookData = this.bookDetails.value;
-    console.log('4 after edit ->', bookData);
-
     if (this.editIndex !== null) {
-      console.log('5 if edit index valid means previous store data -> ');
-
       if (this.navigationDataService.getIsData()) {
-        console.log('6 previous table form data -> ');
         this.bookService.updateBook(this.editIndex, bookData);
       }
 
       if (this.navigationDataService.getIsApiData()) {
-        console.log('6 previous api data -> ');
         this.bookService.apiUpdateBook(this.editIndex, bookData);
       }
     } else {
-      console.log('5 if edit index invalid means new Table data -> ');
       this.bookService.addBook(bookData);
     }
     this.router.navigate(['/display-books']);

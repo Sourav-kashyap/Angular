@@ -48,8 +48,6 @@ export class BookComponent implements OnInit {
 
   ngOnInit() {
     this.books = this.bookService.getBooks();
-    // Fetch books from API
-    // this.navigationDataService.resetBoolValue();
     if (!this.navigationDataService.getIsApiData()) {
       this.getApiService.getBookFormApi().subscribe({
         next: (data: any[]) => {
@@ -65,7 +63,6 @@ export class BookComponent implements OnInit {
     }
     this.bookService.addApiBooks(this.apiBooks);
     this.apiBooks = this.bookService.getApiBooks();
-    console.log('11 final result ->', this.apiBooks);
   }
 
   editBook(index: number) {
@@ -81,7 +78,6 @@ export class BookComponent implements OnInit {
 
   apiEditBook(index: number) {
     const bookToEdit = this.apiBooks[index];
-    console.log('1 edit Book Data ->', bookToEdit);
     this.navigationDataService?.setApiData({ bookToEdit, index });
     this.router.navigate(['/book-form']);
   }

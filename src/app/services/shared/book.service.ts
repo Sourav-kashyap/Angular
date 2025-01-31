@@ -17,7 +17,6 @@ export class BookService {
   }
 
   updateBook(index: number, updateBook: any) {
-    console.log('7 correct data pass ->', updateBook);
     if (index >= 0 && index < this.books.length) {
       this.books[index] = updateBook;
     } else {
@@ -42,16 +41,8 @@ export class BookService {
   }
 
   apiUpdateBook(index: number, updateBook: any) {
-    console.log('7 correct ->', updateBook);
-    console.log('7  correct ->', index);
-    console.log('7 correct ->', this.apiBooks.length);
-
     if (index >= 0 && index < this.apiBooks.length) {
-      console.log('8 data update successfully->', this.apiBooks[index]);
-
       this.apiBooks[index] = updateBook;
-      console.log('9 data before update ->', this.apiBooks[index]);
-      console.log('10 data after update ->', this.apiBooks);
     } else {
       console.log('Invalid apiBook index');
     }
