@@ -4,21 +4,25 @@ import { BookService } from '../../services/shared/book.service';
 import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { NavigationDataServiceService } from '../../services/tempStore/navigation-data-service.service';
 import { GetApiService } from '../../apis/get-api/get-api.component';
+import { SearchService } from '../../services/search/search.service';
 @Component({
   selector: 'app-book',
-  imports: [NgFor, DatePipe],
+  imports: [NgFor, DatePipe, NgIf],
   templateUrl: './book.component.html',
   styleUrl: './book.component.css',
 })
 export class BookComponent implements OnInit {
   books: any[] = [];
   apiBooks: any[] = [];
+  combined: any[] = [];
+  searchTerm: string = '';
 
   constructor(
     private router: Router,
     private bookService: BookService,
     private navigationDataService: NavigationDataServiceService,
-    private getApiService: GetApiService
+    private getApiService: GetApiService,
+    private searchService: SearchService
   ) {}
 
   calculateBookAge(publishDate: string): string {
@@ -52,6 +56,7 @@ export class BookComponent implements OnInit {
       this.getApiService.getBookFormApi().subscribe({
         next: (data: any[]) => {
           this.apiBooks = data; // Assign the API response to apiBooks
+          this.combineBooks();
         },
         error: (error) => {
           console.error('Error fetching API books:', error);
@@ -63,6 +68,35 @@ export class BookComponent implements OnInit {
     }
     this.bookService.addApiBooks(this.apiBooks);
     this.apiBooks = this.bookService.getApiBooks();
+
+    // Subscribe to the search query to filter books dynamically
+    this.searchService.searchQuery$.subscribe((query) => {
+      this.searchTerm = query;
+      this.filterBooks();
+    });
+    console.log(this.combineBooks);
+  }
+
+  combineBooks() {
+    this.combined = [...this.books, ...this.apiBooks];
+  }
+
+  filterBooks() {
+    if (!this.searchTerm.trim()) {
+      // If search field is empty, show all books (local + API)
+      this.combined = [...this.books, ...this.apiBooks];
+    } else {
+      const searchLower = this.searchTerm.toLowerCase();
+
+      // Filter books based on title, author, ISBN, or category
+      this.combined = [...this.books, ...this.apiBooks].filter(
+        (book) =>
+          book.title.toLowerCase().includes(searchLower) ||
+          book.author.toLowerCase().includes(searchLower) ||
+          book.isbn.toLowerCase().includes(searchLower) ||
+          book.category.toLowerCase().includes(searchLower)
+      );
+    }
   }
 
   editBook(index: number) {
