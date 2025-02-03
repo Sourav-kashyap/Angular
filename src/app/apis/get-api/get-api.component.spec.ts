@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GetApiComponent } from './get-api.component';
+import { GetApiService } from './get-api.component';
 
-describe('GetApiComponent', () => {
-  let component: GetApiComponent;
-  let fixture: ComponentFixture<GetApiComponent>;
+describe('GetApiService', () => {
+  let component: GetApiService;
+  let fixture: ComponentFixture<GetApiService>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GetApiComponent]
+      imports: [GetApiService]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(GetApiComponent);
+    fixture = TestBed.createComponent(GetApiService);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
