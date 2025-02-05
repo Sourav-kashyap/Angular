@@ -8,6 +8,4 @@ import { BookComponent } from '../book/book.component';
   templateUrl: './display-book.component.html',
   styleUrl: './display-book.component.css'
 })
-export class DisplayBookComponent {
-
-}
+export class DisplayBookComponent {}

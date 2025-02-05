@@ -8,6 +8,4 @@ import { FormComponent } from '../form/form.component';
   templateUrl: './book-form.component.html',
   styleUrl: './book-form.component.css'
 })
-export class BookFormComponent {
-
-}
+export class BookFormComponent {}
